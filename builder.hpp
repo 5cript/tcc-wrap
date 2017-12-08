@@ -32,6 +32,8 @@ namespace TinyCompiler
          */
         void linkLibrary(std::string const& name);
 
+        void passArguments(std::string const& args);
+
         /**
          *  Equivalent to -Lpath option.
          */

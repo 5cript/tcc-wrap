@@ -4,15 +4,13 @@ namespace TinyCompiler
 {
 //#####################################################################################################################
     Context::Context()
-        : ctx_{tcc_new()}
+        : ctx_{nullptr}
     {
+        reset();
     }
 //---------------------------------------------------------------------------------------------------------------------
     void Context::setRuntime(std::string const& directory)
     {
-        runtime_ = directory;
-
-        tcc_set_lib_path(ctx_, directory.c_str());
     }
 //---------------------------------------------------------------------------------------------------------------------
     Context::~Context()
@@ -22,7 +20,8 @@ namespace TinyCompiler
 //---------------------------------------------------------------------------------------------------------------------
     void Context::reset()
     {
-        tcc_delete(ctx_);
+        if (ctx_ != nullptr)
+            tcc_delete(ctx_);
         ctx_ = tcc_new();
 
         setRuntime(runtime_);
